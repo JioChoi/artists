@@ -46,6 +46,9 @@ function App() {
         addEventListener('mouseup', () => {
             setPreview(false);
         });
+        addEventListener('touchend', () => {
+            setPreview(false);
+        });
     }, []);
 
     return (

@@ -20,6 +20,7 @@ export default function Image({index, onMouseDown, artist}) {
             </div>
             <div className="absolute flex justify-center items-top w-full aspect-square text-white text-base opacity-0 lg:hover:cursor-pointer lg:hover:opacity-100 drop-shadow-md"
                 onMouseDown={onMouseDown}
+                onTouchStart={onMouseDown}
             >
                 hold to enlarge
             </div>
