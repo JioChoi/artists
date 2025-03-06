@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react'
 import artistsFile from './assets/artists.txt'
 import { useEffect } from 'react'
 import Image from './components/image'
+import { md5 } from 'js-md5'
 
 function App() {
     const [artistsList, setArtistsList] = useState(null);
@@ -80,12 +81,14 @@ function App() {
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                     {
                         currentList &&
-                        currentList.map((artist, index) => (
-                            <Image key={index} index={index} artist={artist} onMouseDown={() => {
-                                setSelectedArtist(`/${artist}_1.webp`);
+                        currentList.map((artist, index) => {
+                            let filename = md5(artist);
+
+                            return <Image key={index} index={index} artist={artist} filename={filename} onMouseDown={() => {
+                                setSelectedArtist(`images/${filename}.webp`);
                                 setPreview(true);
                             }} />
-                        ))
+                        })
                     }
                 </div>
             </div>

@@ -1,7 +1,7 @@
 
 
 
-export default function Image({index, onMouseDown, artist}) {
+export default function Image({index, onMouseDown, artist, filename}) {
     return (
         <div key={index} className="relative bg-gray-100 text-center text-base rounded-lg shadow-md select-none">
             <div
@@ -24,7 +24,7 @@ export default function Image({index, onMouseDown, artist}) {
             >
                 hold to enlarge
             </div>
-            <img loading="lazy" src={`/${artist}_1.webp`} alt={artist} className="w-full overflow-hidden rounded-lg rounded-b-none select-none" />
+            <img loading="lazy" src={`images/${filename}.webp`} alt={artist} className="w-full overflow-hidden rounded-lg rounded-b-none select-none" />
             {artist}
         </div>
     )
