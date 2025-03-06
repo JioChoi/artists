@@ -90,8 +90,8 @@ function App() {
                 </div>
             </div>
 
-            <div className={`w-full h-full fixed top-0 left-0 flex justify-center items-center bg-black/50 z-50 transition-opacity duration-150 backdrop-blur-xs
-                    ${preview ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+            <div className={`w-full h-full fixed top-0 left-0 flex justify-center items-center bg-black/50 z-50 transition-opacity duration-150 backdrop-blur-xs pointer-events-none
+                    ${preview ? 'opacity-100' : 'opacity-0'}
                 `}>
                 <div className="max-w-[90%] max-h-[90%] aspect-square select-none shadow-2xl">
                     <img src={selectedArtist} alt="selected artist" className="rounded-xl" draggable={false}/>
