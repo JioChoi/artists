@@ -97,7 +97,7 @@ function App() {
                     ${preview ? 'opacity-100' : 'opacity-0'}
                 `}>
                 <div className="max-w-[90%] max-h-[90%] aspect-square select-none shadow-2xl">
-                    <img src={selectedArtist} alt="selected artist" className="rounded-xl" draggable={false}/>
+                    <img src={selectedArtist} alt="selected artist" className="w-full rounded-xl aspect-square object-cover" draggable={false}/>
                 </div>
             </div>
         </>
