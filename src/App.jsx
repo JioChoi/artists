@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react'
 import artistsFile from './assets/artists.txt'
 import scoredFile from './assets/scored.txt'
+import scoredFile2 from './assets/scored2.txt'
 import { useEffect } from 'react'
 import Image from './components/image'
 import { md5 } from 'js-md5'
@@ -55,6 +56,12 @@ function App() {
             const artists = data.split('\n');
             setArtistsList(artists);
         }
+        else if (type == 2) {
+            const response = await fetch(scoredFile2);
+            const data = await response.text();
+            const artists = data.split('\n');
+            setArtistsList(artists);
+        }
     }
 
     // on load
@@ -97,7 +104,8 @@ function App() {
 
                 <select onChange={(e) => setArtistList(e.target.value)} className="w-48 mt-8 p-2 rounded-lg outline-1 outline-zinc-300 lg:hover:cursor-pointer lg:hover:outline-zinc-600">
                     <option value="0">Sort by image count</option>
-                    <option value="1">Sort by quality</option>
+                    <option value="1">Sort by quality (SCORA)</option>
+                    <option value="2">Sort by quality (SCORB)</option>
                 </select>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
