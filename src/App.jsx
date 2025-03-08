@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import artistsFile from './assets/artists.txt'
+import scoredFile from './assets/scored.txt'
 import { useEffect } from 'react'
 import Image from './components/image'
 import { md5 } from 'js-md5'
@@ -11,8 +12,13 @@ function App() {
     const [currentList, setCurrentList] = useState([]);
     const index = useRef(0);
 
-    function add() {
-        setCurrentList([...currentList, ...artistsList.slice(index.current, index.current + 40)]);
+    function add(clear=false) {
+        let temp = currentList;
+        if (clear) {
+            index.current = 0;
+            temp = [];
+        }
+        setCurrentList([...temp, ...artistsList.slice(index.current, index.current + 40)]);
         index.current += 40;
     }
 
@@ -31,18 +37,29 @@ function App() {
 
     useEffect(() => {
         if (artistsList) {
-            add();
+            add(true);
         }
     }, [artistsList]);
 
-    // on load
-    useEffect(() => {
-        (async () => {
+    async function setArtistList(type) {
+
+        if (type == 0) {
             const response = await fetch(artistsFile);
             const data = await response.text();
             const artists = data.split('\n');
             setArtistsList(artists);
-        })();
+        }
+        else if (type == 1) {
+            const response = await fetch(scoredFile);
+            const data = await response.text();
+            const artists = data.split('\n');
+            setArtistsList(artists);
+        }
+    }
+
+    // on load
+    useEffect(() => {
+        setArtistList(0);
 
         addEventListener('mouseup', () => {
             setPreview(false);
@@ -78,11 +95,16 @@ function App() {
                     <p>Undesired Content Strength: 0</p>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                <select onChange={(e) => setArtistList(e.target.value)} className="w-48 mt-8 p-2 rounded-lg outline-1 outline-zinc-300 lg:hover:cursor-pointer lg:hover:outline-zinc-600">
+                    <option value="0">Sort by image count</option>
+                    <option value="1">Sort by quality</option>
+                </select>
+
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
                     {
                         currentList &&
                         currentList.map((artist, index) => {
-                            let filename = md5(artist);
+                            let filename = md5(artist.trim());
 
                             return <Image key={index} index={index} artist={artist} filename={filename} onMouseDown={() => {
                                 setSelectedArtist(`images/${filename}.webp`);
