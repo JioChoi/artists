@@ -24,7 +24,7 @@ export default function Image({index, onMouseDown, artist, filename}) {
             >
                 hold to enlarge
             </div>
-            <img loading="lazy" src={`images/${filename}.webp`} alt={artist} className="w-full aspect-square object-cover overflow-hidden rounded-lg rounded-b-none select-none" />
+            <img loading="lazy" src={`https://huggingface.co/datasets/Jio7/artists/resolve/main/${filename}.webp`} alt={artist} className="w-full aspect-square object-cover overflow-hidden rounded-lg rounded-b-none select-none" />
             {artist}
         </div>
     )

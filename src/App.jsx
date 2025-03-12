@@ -115,7 +115,7 @@ function App() {
                             let filename = md5(artist.trim());
 
                             return <Image key={index} index={index} artist={artist} filename={filename} onMouseDown={() => {
-                                setSelectedArtist(`images/${filename}.webp`);
+                                setSelectedArtist(`https://huggingface.co/datasets/Jio7/artists/resolve/main/${filename}.webp`);
                                 setPreview(true);
                             }} />
                         })
